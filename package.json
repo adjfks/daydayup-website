@@ -5,7 +5,8 @@
   "scripts": {
     "toc": "node toc.js",
     "docs:dev": "npm run toc && vuepress dev docs",
-    "docs:build": "npm run toc && vuepress build docs"
+    "docs:build": "npm run toc && vuepress build docs",
+    "build": "npm run docs:build"
   },
   "license": "MIT",
   "devDependencies": {
