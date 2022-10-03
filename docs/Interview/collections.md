@@ -2232,7 +2232,13 @@ display: -webkit-box;
 
 3. filter
 
-### 
+### 13. css选择器是否区分大小写
+
+1. CSS属性、值、伪类名、伪元素名、元素名不区分大小写。
+2. CSS 类、 id 、 urls 、 font-families 是区分大小写的。
+3. 在 html quirks 模式下，css 即使对于 ID 和类也不区分大小写
+[demo](https://codepen.io/swapnilPakolu/pen/MWgvQyB?&editable=true#anon-signup)
+
 
 # 👏html
 
