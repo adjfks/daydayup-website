@@ -1,5 +1,11 @@
 name: DEPLOY TO GH-PAGES
-on: [push]
+on: 
+  push:
+    branches:
+    - master
+  pull_request:
+    branches:
+    - master
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
