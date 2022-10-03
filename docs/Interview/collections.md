@@ -2240,6 +2240,12 @@ display: -webkit-box;
 [demo](https://codepen.io/swapnilPakolu/pen/MWgvQyB?&editable=true#anon-signup)
 
 
+### 14. 行内(inline)元素 设置margin-top和margin-bottom 是否起作用？
+需要分情况讨论：
+1. 对于非替换的行内元素如span标签不起作用，上下margin不撑开父级容器。
+2. 对于替换的行内元素如img标签起作用，上下margin可以撑开父容器。
+
+
 # 👏html
 
 ## 👀基础
