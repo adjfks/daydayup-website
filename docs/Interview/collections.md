@@ -343,7 +343,19 @@ foo()
 
 ### 19. new fn 和 new fn()区别？
 
-# 
+### 20. Json.stringfy()方法
+该方法有1个必须的参数和2个可选参数：
+1. value: 要被序列化成json字符串的值，可以是除了循环引用对象和BigInt以外的值（都抛出TypeError错误）
+- value为单独的undefined或函数结果为undefined，作为对象属性值的undefined或函数会被忽略，作为数组项的undefined或函数会被转换成null.
+- 所有以 symbol 为属性键的属性都会被完全忽略掉
+- NaN 和 Infinity 格式的数值及 null 都会被当做 null。
+- 其他类型的对象，包括 Map/Set/WeakMap/WeakSet，仅会序列化可枚举的属性。
+2. replacer: 1个函数或1个字符串数组，函数的参数为key和value，若是数组则只有数组中存在的属性会被序列化
+- 函数如果返回undefined，则传入该函数的属性值不会被序列化，但是如果传入的是要序列化的数组的元素，则会是null
+3. space: 1个数字或字符串，数字表示缩进用的空格数，最大为10;字符串则被用作空格；如果不提供该参数或为null，则没有空格。
+注意：
+- 如果一个被序列化的对象拥有 toJSON 方法，那么该 toJSON 方法就会覆盖该对象默认的序列化行为：不是该对象被序列化，而是调用 toJSON 方法后的返回值会被序列化
+
 
 ## 👀核心
 
