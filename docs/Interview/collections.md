@@ -358,6 +358,22 @@ foo()
    注意：
 - 如果一个被序列化的对象拥有 toJSON 方法，那么该 toJSON 方法就会覆盖该对象默认的序列化行为：不是该对象被序列化，而是调用 toJSON 方法后的返回值会被序列化
 
+### 21. Object.keys()与Object.getOwnPropertyNames()的区别？
+
+1. 都是用来获取对象属性组成的数组
+
+2. `Object.keys()`只能获取对象的可迭代属性名，`Object.getOwnPropertyNames()`则获取对象自身的所有属性名，
+即`enumerable`为`false`的属性`Object.keys()`获取不到
+
+3. 返回的属性名顺序为字典序
+
+4. `Object.keys()`获取不到数组的`length`属性，而`Object.getOwnPropertyNames()`可以，原因是数组的length属性是不可迭代的
+
+```js
+Object.getOwnPropertyDescriptor([],'length')
+// { value: 0, writable: true, enumerable: false, configurable: false }
+```
+
 ## 👀核心
 
 ### 1.闭包及其应用 ？
@@ -1315,6 +1331,22 @@ window.setInterval(() => {
 在微任务之间没有 UI 或网络事件的处理：它们一个立即接一个地执行。
 
 所以，我们可以使用 `queueMicrotask` 来在保持环境状态一致的情况下，异步地执行一个函数。
+
+### 10. 说说严格模式
+
+严格模式是ES5提出的，IE10+支持，旧版本浏览器会忽略该模式。严格模式主要为了解决三方面的问题：
+
+1. 语法：消除不严谨的语法，减少怪异行为，例如：
+- 变量先声明再使用
+- 不能删除声明好的变量
+- 全局作用域下的this指向undefined,不过定时器this仍指向window
+- 不允许函数重名，不允许在非函数代码块中声明函数
+
+2. 安全：消除允行时的不安全之处
+
+3. 效率：提升编译器的效率和速度
+
+严格模式可以在脚本第一行添加`"use strict"`全局开启，也可以在某个函数体第一行添加局部开启。
 
 # 👏前端工程化
 
@@ -2306,6 +2338,12 @@ display: -webkit-box;
 
 常见的伪元素有：`::before`,`::after`,`::first-line`,`::first-letter`
 
+### 16. dpr是啥
+
+dpr即物理像素比，设备的物理像素和逻辑像素的比值，如2:1表示4个物理像素表示一个css像素。
+
+假设有一张图片的实际大小为10px * 10px，我们像让它的dpr为2:1的设备上展示实际的大小，那么设置其css大小应该为5px.
+
 # 👏html
 
 ## 👀基础
@@ -2367,6 +2405,22 @@ display: -webkit-box;
 6. 便于屏幕阅读器阅读。
 
 7. 文本的语义化，如超链接的文本内容应该描述链接内容而不是像`点我`这类词语，表单的文本可以使用label标签结合for属性使用。
+
+### 7. `<meta name="viewport">`标签的作用
+
+```html
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+```
+上面这段HTML代码主要是针对移动端的，因为移动端html网页的默认宽度是980px并不等于设备宽度，因此通过该标签将视口宽度设置为与
+设备同宽，制作适配不同宽度设备的网页。
+
+### 8. 移动端click事件有什么问题？
+
+移动端click事件有300ms延时，原因是移动端可以双击进行网页缩放。解决方式就是给HTML添加一个meta标签禁用缩放
+
+```html
+<meta name="viewport" content="user-scalable=no">
+```
 
 # 👏代码题
 
