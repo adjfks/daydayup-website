@@ -363,7 +363,7 @@ foo()
 1. 都是用来获取对象属性组成的数组
 
 2. `Object.keys()`只能获取对象的可迭代属性名，`Object.getOwnPropertyNames()`则获取对象自身的所有属性名，
-即`enumerable`为`false`的属性`Object.keys()`获取不到
+   即`enumerable`为`false`的属性`Object.keys()`获取不到
 
 3. 返回的属性名顺序为字典序
 
@@ -1338,10 +1338,12 @@ window.setInterval(() => {
 
 1. 语法：消除不严谨的语法，减少怪异行为，例如：
 - 变量先声明再使用
-- 不能删除声明好的变量
-- 全局作用域下的this指向undefined,不过定时器this仍指向window
-- 不允许函数重名，不允许在非函数代码块中声明函数
 
+- 不能删除声明好的变量
+
+- 全局作用域下的this指向undefined,不过定时器this仍指向window
+
+- 不允许函数重名，不允许在非函数代码块中声明函数
 2. 安全：消除允行时的不安全之处
 
 3. 效率：提升编译器的效率和速度
@@ -1866,13 +1868,23 @@ post: 通常是在网页中放入一个隐藏的会自动提交的表单。
   
   - 同源检测
   
+  利用HTTP Header: Origin / Referer
+  
   - Samesite Cookie
+  
+  `Samesite=Strict`： 只要是外域的请求都不会携带cookie
+  
+  `Samesite=Lax`：页面间跳转会携带cookie，但是其他跨域请求不会
 
 - 提交时要求附加本域才能获取到信息
   
   - CSRF Token
   
+  在每一个请求中携带token，服务器端验证token有效性。
+  
   - 双重cookie验证
+  
+  除了浏览器自动携带的cookie，可以在参数中加入cookie，然后服务器验证cookie有效性，这种防御方式利用了黑客无法获取cookie值的特点。
 
 ### 22. HTTP协议的缓存策略有哪些？
 
@@ -2411,6 +2423,7 @@ dpr即物理像素比，设备的物理像素和逻辑像素的比值，如2:1�
 ```html
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 ```
+
 上面这段HTML代码主要是针对移动端的，因为移动端html网页的默认宽度是980px并不等于设备宽度，因此通过该标签将视口宽度设置为与
 设备同宽，制作适配不同宽度设备的网页。
 
