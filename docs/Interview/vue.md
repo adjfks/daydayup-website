@@ -165,33 +165,35 @@ keep-alive有3个props，分别是include/exclude/max，可以用于指定要缓
 
 4. 在vue2中，两者放在一起输出的渲染函数是先执行循环，在循环里判段；vue3中是先判断再决定是否循环。
    
-    // vue3
-    return function render(_ctx, _cache) {
-      with (_ctx) {
-   
-        const { createCommentVNode: _createCommentVNode, renderList: _renderList, Fragment: _Fragment, openBlock: _openBlock, createElementBlock: _createElementBlock, toDisplayString: _toDisplayString, createElementVNode: _createElementVNode } = _Vue
-        return (_openBlock(), _createElementBlock(_Fragment, null, [
-          _createCommentVNode(" 过滤列表中项目 "),
-          _createCommentVNode(" 过滤列表中项目 "),
-          _createCommentVNode(" 浏览器控制台会报错：Uncaught TypeError: Cannot read properties of undefined (reading 'isActive') "),
-          _createCommentVNode(" <div id=\"app\">\n      <div v-for=\"item in items\" :key=\"item.id\" v-if=\"item.isActive\">\n        {{ item.name }}\n      </div>\n    </div> "),
-          _createCommentVNode(" 避免渲染应该被隐藏的列表 "),
-          _createElementVNode("div", _hoisted_1, [
-            shouldShowUsers
-              ? (_openBlock(true), _createElementBlock(_Fragment, { key: 0 }, _renderList(items, (item) => {
-                  return (_openBlock(), _createElementBlock("div", { key: item.id }, _toDisplayString(item.name), 1 /* TEXT */))
-                }), 128 /* KEYED_FRAGMENT */))
-              : _createCommentVNode("v-if", true)
-          ])
-        ], 2112 /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */))
-   
-      }
-    }
-    // vue2
-    (function anonymous(
-    ) {
-    with(this){return _c('div',{attrs:{"id":"app"}},[_c('div',{attrs:{"id":"app"}},_l((items),function(item){return (shouldShowUsers)?_c('div',{key:item.id},[_v("\n        "+_s(item.name)+"\n      ")]):_e()}),0)])}
-    })
+```js
+// vue3
+return function render(_ctx, _cache) {
+  with (_ctx) {
+
+    const { createCommentVNode: _createCommentVNode, renderList: _renderList, Fragment: _Fragment, openBlock: _openBlock, createElementBlock: _createElementBlock, toDisplayString: _toDisplayString, createElementVNode: _createElementVNode } = _Vue
+    return (_openBlock(), _createElementBlock(_Fragment, null, [
+      _createCommentVNode(" 过滤列表中项目 "),
+      _createCommentVNode(" 过滤列表中项目 "),
+      _createCommentVNode(" 浏览器控制台会报错：Uncaught TypeError: Cannot read properties of undefined (reading 'isActive') "),
+      _createCommentVNode(" <div id=\"app\">\n      <div v-for=\"item in items\" :key=\"item.id\" v-if=\"item.isActive\">\n        {{ item.name }}\n      </div>\n    </div> "),
+      _createCommentVNode(" 避免渲染应该被隐藏的列表 "),
+      _createElementVNode("div", _hoisted_1, [
+        shouldShowUsers
+          ? (_openBlock(true), _createElementBlock(_Fragment, { key: 0 }, _renderList(items, (item) => {
+              return (_openBlock(), _createElementBlock("div", { key: item.id }, _toDisplayString(item.name), 1 /* TEXT */))
+            }), 128 /* KEYED_FRAGMENT */))
+          : _createCommentVNode("v-if", true)
+      ])
+    ], 2112 /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */))
+
+  }
+}
+// vue2
+(function anonymous(
+) {
+with(this){return _c('div',{attrs:{"id":"app"}},[_c('div',{attrs:{"id":"app"}},_l((items),function(item){return (shouldShowUsers)?_c('div',{key:item.id},[_v("\n        "+_s(item.name)+"\n      ")]):_e()}),0)])}
+})
+```
 
 ### 3.[面试官：说说你对vue的理解? ](https://github.com/febobo/web-interview/issues/1)
 
@@ -314,7 +316,7 @@ created开始
 
 ### 8. Vue3相比于Vue2有哪些优点？
 
-https://segmentfault.com/a/1190000040695447
+[参考](https://segmentfault.com/a/1190000040695447)
 
 1. diff算法优化：Vue2中虚拟DOM是全量对比，无论节点是动态的还是静态的都会一层一层比较。Vue3中新增了静态标记`patchFlag`，用于标记动态数据所在的节点，在与上次虚拟DOM比对时只对比带有`patchFlag`标记的节点。`patchFlag`是一个枚举，取值1代表文本是动态绑定的，取值为2代表元素的class是动态绑定的。
 
