@@ -71,3 +71,22 @@
 移动端click事件有300ms延时，原因是移动端可以双击进行网页缩放。解决方式就是给HTML添加一个meta标签禁用缩放
 
     <meta name="viewport" content="user-scalable=no">
+
+### 9. H5新特性
+
+1. 语义化标签
+2. 多媒体支持
+3. Canvas和SVG
+4. 本地存储localStorage和sessionStorage API
+5. Web Worker 和 WebSocket
+
+追问：localstorage的api,原理
+
+1. `setItem, getItem, removeItem, clear`
+2. 大多数浏览器的localStorage基于SQLite数据库实现，会为每个域名下的localStorage创建一个数据库文件。
+3. 浏览器开启隐私模式可能会禁用localStorage.
+
+能跨域吗？怎么跨域共享？
+
+1. 不能跨域。
+2. 利用iframe。

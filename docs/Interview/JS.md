@@ -355,7 +355,7 @@ async就是一个异步的标识符，必须配合await才能达到异步效果�
 3. 返回的属性名顺序为字典序
 
 4. `Object.keys()`获取不到数组的`length`属性，而`Object.getOwnPropertyNames()`可以，原因是数组的length属性是不可迭代的
-
+   
     Object.getOwnPropertyDescriptor([],'length')
     // { value: 0, writable: true, enumerable: false, configurable: false }
 
@@ -650,17 +650,20 @@ class继承必须在子类的构造函数里调用`super()`函数，`super`既�
 * `super()`相当于`A.constructor.call(B)`，B继承A
 
 * `super.sayHi()`相当于`A.prototype.sayHi()`，这里注意`super`指向`A.prototype`，所以`A`本身的属性和方法是访问不到的。
-
+  
     class A {
+  
       constructor() {
         this.x = 1;
       }
       print() {
         console.log(this.x);    // 这个方法是在A.prototype上的
       }
+  
     }
-    
+  
     class B extends A {
+  
       constructor() {
         super();
         this.x = 2;
@@ -668,8 +671,9 @@ class继承必须在子类的构造函数里调用`super()`函数，`super`既�
       m() {
         super.print();        // this指向B
       }
+  
     }
-    
+  
     let b = new B();
     b.m() // 2
 
@@ -709,6 +713,30 @@ es6的class其实就是个语法糖，babel转出来的依旧是寄生组合式�
         }
       });
     };
+
+
+
+### 3. 说说es6新特性
+
+1. 引入了块级作用域，let, const
+
+2. 新增箭头函数
+   
+   1. 没有自己的this，this指向父级作用域的this
+   
+   2. 不能使用call、apply、bind改变this指向
+   
+   3. 不能用作构造函数，new会报错,不允许在函数体使用new.target，会报错
+   
+   4. 不能使用arguments对象，但是可以`...args`
+
+3. 新增模板字符串
+
+4. 新增类class
+
+
+
+
 
 ## 👀DOM
 

@@ -2146,7 +2146,42 @@ TCP是一个**传输层的通信协议**，它具有面向连接，可靠，基�
 
 端口不同，明文和加密，https需要申请CA证书，http速度比https快
 
-## 
+### 32. post请求的请求body长啥样？
+
+请求体传输的数据格式应该是后端也能处理的，例如json，formData
+
+1. 传输json,`Content-Type: application/json`
+
+```bash
+POST /api/users HTTP/1.1
+Host: example.com
+Content-Type: application/json
+Content-Length: 57
+
+{"name":"John Smith","age":30,"city":"New York"}
+```
+
+2. 传输formData,以传输一张图片为例
+
+请求体中每部分数据由boundary分隔，每个部分包含首部和主体。
+
+```bash
+POST /upload HTTP/1.1
+Host: example.com
+Content-Length: 356
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryyrV7KO0BoCBuDbTL
+
+------WebKitFormBoundaryyrV7KO0BoCBuDbTL
+Content-Disposition: form-data; name="title"
+
+Title of the image
+------WebKitFormBoundaryyrV7KO0BoCBuDbTL
+Content-Disposition: form-data; name="image"; filename="example.jpg"
+Content-Type: image/jpeg
+
+(此处省略图片的二进制数据)
+------WebKitFormBoundaryyrV7KO0BoCBuDbTL--
+```
 
 ## 场景题
 
@@ -2459,6 +2494,15 @@ dpr即物理像素比，设备的物理像素和逻辑像素的比值，如2:1�
 ### 8. 移动端click事件有什么问题？
 
 移动端click事件有300ms延时，原因是移动端可以双击进行网页缩放。解决方式就是给HTML添加一个meta标签禁用缩放
+
+### 9. H5新特性
+
+1. 语义化标签
+2. 多媒体支持
+3. Canvas和SVG
+4. 本地存储localStorage和sessionStorage API
+5. Web Worker 和 WebSocket
+
 
 ```html
 <meta name="viewport" content="user-scalable=no">

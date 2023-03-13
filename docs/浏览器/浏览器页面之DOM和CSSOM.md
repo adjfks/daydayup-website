@@ -36,7 +36,7 @@ HTML解析器会维护一个Token栈结构，主要用于计算节点之间的�
 
 为什么要这样做呢？因为js脚本可以操作DOM，它有可能去操作已经解析完的DOM。
 
-如果我们能够确定js文件中没有DOM操作，那么我们可以将js脚本设置为异步加载，通过在<script>标签上添加`defer`或`async`来设置。
+如果我们能够确定js文件中没有DOM操作，那么我们可以将js脚本设置为异步加载，通过在`<script>`标签上添加`defer`或`async`来设置。
 
 ```html
 <script async type="text/javascript" src='foo.js'></script>
