@@ -374,6 +374,32 @@ Object.getOwnPropertyDescriptor([],'length')
 // { value: 0, writable: true, enumerable: false, configurable: false }
 ```
 
+### 22. JS的严格模式有什么特点？
+
+[MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Strict_mode)上对严格模式的说明：
+
+> 严格模式通过抛出错误来消除了一些原有静默错误。
+> 严格模式修复了一些导致 JavaScript 引擎难以执行优化的缺陷：有时候，相同的代码，严格模式可以比非严格模式下运行得更快。
+> 严格模式禁用了在 ECMAScript 的未来版本中可能会定义的一些语法。
+
+严格模式可以在全局或函数作用域开启，开启后有以下特点：
+
+1. 变量必须使用`let var const`等声明，不能直接给一个未声明的变量赋值。
+
+2. 会使原本静默的失败抛出错误，例如修改一个不可写的对象属性，给NaN赋值等，删除不可删除的属性（例如对象的prototype）
+
+3. 不允许对象有重名属性，正常模式重名时值由最后一个属性决定
+
+4. 不允许重名的函数参数
+
+5. 不允许八进制数字语法，ECMAScript并不允许这种语法，但是所有浏览器都支持，严格模式禁用该语法。
+
+6. 不允许使用with
+
+7. 正常模式修改函数形参会修改arguments对应属性，反之亦然，严格模式则互不影响。
+
+8. 为将来语言版本铺路，一些可能会成为关键字的不能再作为变量名使用
+
 ## 👀核心
 
 ### 1.闭包及其应用 ？
