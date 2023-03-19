@@ -1070,43 +1070,51 @@ history模式
 
 # 👏浏览器
 
-### 1.你知道哪些跨页面通信的方式呢？
+### 1. 你知道哪些跨页面通信的方式呢？
 
 [面试官：前端跨页面通信，你知道哪些方法？ - 掘金](https://juejin.cn/post/6844903811232825357)
 
-- 广播模式：Broadcast Channe / Service Worker / LocalStorage + StorageEvent
-- 共享存储模式：Shared Worker / IndexedDB / cookie
-- 口口相传模式：window.open + window.opener
-- 基于服务端：Websocket / Comet / SSE 等
+同源页面：
 
-**同源页面**
+1. `BroadcastChannel`允许同源的不同浏览器窗口，Tab页，frame或者 iframe 下的不同文档之间相互通信。
+```js
+// A
+const channel = new BroadcastChannel('channel-name');
+channel.postMessage('Hello from A!');
 
-- **Broadcast Channel**
-  
-  - 它允许同源的不同浏览器窗口，Tab页，frame或者 iframe 下的不同文档之间相互通信。
-  
-  ```javascript
-  var bc = new BroadcastChannel('internal_notification');
-  bc.postMessage('New listening connected!');
-  ```
 
-- **Service Worker**
+// B
+const channel = new BroadcastChannel('channel-name');
+channel.addEventListener('message', event => {
+  console.log(event.data); // "Hello from A!"
+});
+```
 
-    在 Service Worker 中监听了`message`事件，获取页面（从 Service Worker 的角度叫 client）发送的信息。然后通过`self.clients.matchAll()`获取当前注册了该 Service Worker 的所有页面，通过调用每个client（即页面）的`postMessage`方法，向页面发送消息。这样就把从一处（某个Tab页面）收到的消息通知给了其他页面。
+2. `localStorage`和`storage`事件
+```js
+localStorage.setItem('key', 'value');
 
-- **LocalStorage**
+window.addEventListener('storage', function(e) {
+  console.log('localStorage值被修改了：', e.newValue);
+});
+```
 
-当前页面使用的storage被其他页面修改时会触发StorageEvent事件，该事件对象上有5个只读的属性：`key newValue oldValue storageArea url`
+3. `SharedWorker`
 
-- **Shared Worker**
+通过`new SharedWorker(脚本)`传入同一脚本可以创建一个多页面共享的worker线程。这个worker脚本作为一个信息中转中心，
 
-- **IndexedDB**
+当接收到消息时向所有页面发送消息。
 
-- **window.open + window.opener**
+
+* 广播模式：Broadcast Channe / Service Worker / LocalStorage + StorageEvent
+* 共享存储模式：Shared Worker / IndexedDB / cookie
+* 口口相传模式：window.open + window.opener
+* 基于服务端：Websocket / Comet / SSE 等
+
 
 **非同源页面**
 
-- **iframe**
+1. 内嵌iframe
 
 使用一个用户不可见的 **iframe **作为“桥”。由于 iframe 与父页面间可以通过指定`origin`来忽略同源限制，因此可以在每个页面中嵌入一个 iframe （例如：`http://sample.com/bridge.html`），而这些 iframe 由于使用的是一个 url，因此属于同源页面，其通信方式可以复用上面第一部分提到的各种方式。
 
