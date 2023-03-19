@@ -2553,6 +2553,11 @@ dpr即物理像素比，设备的物理像素和逻辑像素的比值，如2:1�
 <meta name="viewport" content="user-scalable=no">
 ```
 
+### 10. href属性和src属性的区别？
+
+1. href是用于定义超链接的属性，它可以引用外部或内部的资源
+2. src用于指定要嵌入到HTML文档中的外部资源的URL
+
 # 👏代码题
 
 ### 1.Symbol.iterator
