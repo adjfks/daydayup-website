@@ -212,3 +212,39 @@ dpr即物理像素比，设备的物理像素和逻辑像素的比值，如2:1�
 7. 表格单元格或设置了`display: table-cell`的元素
 8. 设置了`display: inline-block`的元素
 9. 网格布局元素
+
+### 18. 圣杯布局和双飞翼布局？
+
+- 圣杯布局
+
+1. HTML结构中间栏放第一，然后是左栏和右栏
+2. 父容器设置左右padding为左栏和右栏宽度，中间栏设置宽度为父容器宽度，所有子元素都设置左浮动，此时中间栏将左右栏挤到下一行
+3. 左右栏通过负margin值回到上一行，左栏`margin: -100%;`（百分数相对父容器宽度），右栏设置`margin: -自身宽度`
+4. 左右栏设置相对定位，左栏`left: -自身宽度`, 右栏`left: 自身宽度`
+
+```html
+<div>
+    <div class="center"></div>
+    <div class="left"></div>
+    <div class="right"></div>
+</div>
+```
+
+- 双飞翼布局
+
+和圣杯不同的是左右栏位置是通过中间栏的margin挤开而不是padding, HTML结构也作相应调整
+
+1. HTML结构中间栏容器外再套一层
+2. 父容器中所有子元素都设置左浮动
+3. center块设置左右margin
+4. 左右只需设置负margin回到上一行，不用相对定位了
+
+```html
+<div>
+    <div class="wrapper">
+        <div class="center"></div>
+    </div>
+    <div class="left"></div>
+    <div class="right"></div>
+</div>
+```
