@@ -742,6 +742,16 @@ b.m() // 2
 
 在子类普通方法中通过`super`调用父类的方法时，方法内部的`this`指向当前的子类实例。
 
+### 12. `fn instanceof Object` 和 `Function instanceof Object`的值
+
+1. 一个函数的原型链：`fn -> Function.prototype -> Object.prototype -> null`, 因此`fn instanceof Function`和`fn instanceof Object`都为`true`.
+
+2.  `Function`和`Object`的原型链：`Function | Object -> Function.prototype -> Object.prototype -> null`, 因此`Function instanceof Function`和`Function instanceof Object`都为`true`
+
+3. 对象的原型链：`{} -> Object.prototype -> null`
+
+总结：函数，Function, Object的原型链相同
+
 ## 👀ES6
 
 ### 1.class
