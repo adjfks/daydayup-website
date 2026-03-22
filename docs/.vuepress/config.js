@@ -18,6 +18,20 @@ module.exports = {
       })();
       `,
     ],
+    [
+      'script',
+      {},
+      `var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://plausible.io/js/pa-Fiis9x45ppJVSgxjZJnmC.js";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+        window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+  plausible.init()
+      })();
+      `,
+    ],
   ],
   locales: {
     '/': {
